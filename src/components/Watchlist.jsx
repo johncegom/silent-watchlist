@@ -1,31 +1,10 @@
-import axios from "axios";
-import { StatusBar } from "expo-status-bar";
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
-import { XMLParser } from "fast-xml-parser";
+import { View, Text, ActivityIndicator, StyleSheet } from "react-native";
 import { useEffect, useRef, useState } from "react";
+import { XMLParser } from "fast-xml-parser";
+import axios from "axios";
+import { GOLD_API_URL } from "../constants/api";
 
-interface ApiResponse {
-  GoldList: GoldList;
-}
-interface GoldList {
-  DGPlist: DGPlist;
-}
-
-interface DGPlist {
-  Row: GoldItem[];
-}
-
-interface GoldItem {
-  "@_Name": string;
-  "@_Sell": string;
-  "@_Buy"?: string;
-  // Add other properties as needed based on your API response
-}
-
-const API_URL =
-  "https://giavang.doji.vn/api/giavang/?api_key=258fbd2a72ce8481089d88c678e9fe4f";
-
-const convertToVND = (amount?: string | null): string => {
+const convertToVND = (amount) => {
   if (!amount) return "";
 
   // Keep digits, dots, commas and minus sign
@@ -53,9 +32,9 @@ const convertToVND = (amount?: string | null): string => {
   });
 };
 
-export default function App() {
-  const [goldPrice, setGoldPrice] = useState<GoldItem | null>(null);
-  const goldPriceIntervalRef = useRef<NodeJS.Timeout | null>(null);
+const WatchList = () => {
+  const [goldPrice, setGoldPrice] = useState(null);
+  const goldPriceIntervalRef = useRef(null);
 
   useEffect(() => {
     loadGoldPrice();
@@ -80,16 +59,14 @@ export default function App() {
 
   const loadGoldPrice = async () => {
     try {
-      const response = await axios.get(API_URL, {
+      const response = await axios.get(GOLD_API_URL, {
         responseType: "text",
       });
       const parser = new XMLParser({ ignoreAttributes: false });
-      const data: ApiResponse = parser.parse(response.data);
+      const data = parser.parse(response.data);
       const rows = data?.GoldList?.DGPlist?.Row || [];
 
-      const goldPrice: GoldItem | undefined = rows.find(
-        (item: GoldItem) => item["@_Name"] === "DOJI HCM lẻ"
-      );
+      const goldPrice = rows.find((item) => item["@_Name"] === "DOJI HCM lẻ");
 
       if (!goldPrice) {
         console.warn("No data.");
@@ -103,7 +80,7 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={{ flex: 1, alignItems: "center", paddingTop: 50 }}>
       <Text style={[{ fontSize: 40 }]}>Gold Price (Doji): </Text>
       <Text style={styles.text}>
         Buy Price:{" "}
@@ -121,18 +98,13 @@ export default function App() {
           <ActivityIndicator size="large" color="gray" />
         )}
       </Text>
-      <StatusBar style="auto" />
     </View>
   );
-}
+};
+
+export default WatchList;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
   text: {
     fontSize: 25,
   },

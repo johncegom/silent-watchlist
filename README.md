@@ -123,7 +123,7 @@ GET https://giavang.doji.vn/api/giavang/?api_key=258fbd2a72ce8481089d88c678e9fe4
 ## 🧩 Suggested Folder Structure
 
 ```
-SilentWatch/
+SilentWatchlist/
 ├── src/
 │   ├── api/
 │   │   ├── cryptoApi.ts
@@ -163,8 +163,8 @@ SilentWatch/
 ### 1️⃣ Install dependencies
 
 ```bash
-npx create-expo-app SilentWatch
-cd SilentWatch
+npx create-expo-app SilentWatchlist
+cd SilentWatchlist
 npm install axios @tanstack/react-query expo-notifications
 ```
 
@@ -195,4 +195,4 @@ npx expo start
 
 ## 📜 License
 
-MIT License © 2025 Silent Watchlist Project Team
+MIT License © 2025 Silent Watchlist johncegom
