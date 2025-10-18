@@ -1,8 +1,8 @@
-# 🧭 Silent Watch – Smart Price Alert App
+# 🧭 Silent Watchlist – Smart Price Alert App
 
 ## 🎯 Overview
 
-**Silent Watch** is a minimalist React Native mobile app that allows users to **track asset prices (Crypto, Stocks, Gold)** and receive **non-intrusive price alerts** when certain thresholds are reached.
+**Silent Watchlist** is a minimalist React Native mobile app that allows users to **track asset prices (Crypto, Stocks, Gold)** and receive **non-intrusive price alerts** when certain thresholds are reached.
 
 No charts. No spam. Just silent precision.  
 Designed for investors who only want to be notified **when the market reaches their key levels**.
@@ -76,16 +76,6 @@ Designed for investors who only want to be notified **when the market reaches th
 GET https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd
 ```
 
-**Response:**
-
-```json
-{
-  "bitcoin": { "usd": 69850 },
-  "ethereum": { "usd": 3700 },
-  "solana": { "usd": 185 }
-}
-```
-
 ---
 
 ### 📈 Stock Prices
@@ -96,30 +86,14 @@ GET https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs
 GET https://finnhub.io/api/v1/quote?symbol=AAPL&token=YOUR_TOKEN
 ```
 
-**Response:**
-
-```json
-{
-  "c": 170.52
-}
-```
-
 ---
 
 ### 🪙 Gold Prices
 
-**Source:** [Metals-API](https://metals-api.com/)
+**Source:** [Doji GOLD-API](https://giavang.doji.vn/api/giavang/?api_key=258fbd2a72ce8481089d88c678e9fe4f)
 
 ```bash
-GET https://metals-api.com/api/latest?base=USD&symbols=XAU&access_key=YOUR_KEY
-```
-
-**Response:**
-
-```json
-{
-  "rates": { "XAU": 2450.32 }
-}
+GET https://giavang.doji.vn/api/giavang/?api_key=258fbd2a72ce8481089d88c678e9fe4f
 ```
 
 ---
@@ -221,4 +195,4 @@ npx expo start
 
 ## 📜 License
 
-MIT License © 2025 Silent Watch Project Team
+MIT License © 2025 Silent Watchlist Project Team
